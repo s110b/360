@@ -1,6 +1,6 @@
-fork此https://github.com/waschinski/photo-stream
-直接用github 自带的jekyll编译是有问题的，需要安装一个处理图片的插件。
-在官方的jekyll增加两行安装插件：
+* fork此https://github.com/waschinski/photo-stream
+* 直接用github 自带的jekyll编译是有问题的，需要安装一个处理图片的插件。
+* 在官方的jekyll增加两行安装插件：
 ```yml
       - name: Install libvips
         run: |
