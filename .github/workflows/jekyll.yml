@@ -30,6 +30,12 @@ jobs:
   # Build job
   build:
     runs-on: ubuntu-latest
+
+    permissions:
+        # Give the default GITHUB_TOKEN write permission to commit and push the
+        # added or changed files to the repository.
+        contents: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -60,11 +66,18 @@ jobs:
   # Deployment job
   deploy:
     environment:
-      name: github-pages
+      name: github-pages-2
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+        branch: gh-pages
+        folder: public
+        clean: true
+        single-commit: true
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2   # after remove test 
@@ -73,5 +86,10 @@ jobs:
         with:
           api-key: rnd_2VNe9TJ1Auhn7R1v1Df3d87Bap1c
           service-id: srv-ck0rd7b6fquc73a4qu30
+      - name: deploy to Vercel  # after remove test 
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: xjE70mdtbGAHHdCEKEUHhviV # Required
+          vercel-project-id: prj_e6xKgEpy0pD871bdqEy2YqAWJLa2 #Required 
 
         
